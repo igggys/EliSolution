@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute name="space" type="preserve" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="FirmName" xml:space="preserve">
+    <value>אלי קליימן, משרד עורכי דין</value>
+  </data>
+  <data name="WhatsApp" xml:space="preserve">
+    <value>וואטסאפ</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>צור קשר</value>
+  </data>
+  <data name="ContactAlt" xml:space="preserve">
+    <value>יצירת קשר</value>
+  </data>
+  <data name="OpenMenu" xml:space="preserve">
+    <value>פתיחת תפריט</value>
+  </data>
+  <data name="FooterTagline" xml:space="preserve">
+    <value>ליווי משפטי אסטרטגי לעסקים ויזמים – בגובה העיניים, עם ניסיון ומחויבות</value>
+  </data>
+  <data name="FooterPractice" xml:space="preserve">
+    <value>פתרונות משפטיים</value>
+  </data>
+  <data name="FooterContact" xml:space="preserve">
+    <value>ליצירת קשר</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>כל הזכויות שמורות © {0} אלי קליימן, משרד עורכי דין</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>מדיניות פרטיות</value>
+  </data>
+  <data name="TermsOfUse" xml:space="preserve">
+    <value>תנאי שימוש</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>הבית</value>
+  </data>
+  <data name="ReadMore" xml:space="preserve">
+    <value>להמשך קריאה</value>
+  </data>
+  <data name="TalkToMe" xml:space="preserve">
+    <value>דבר איתי</value>
+  </data>
+  <data name="ExperienceYears" xml:space="preserve">
+    <value>שנות ניסיון</value>
+  </data>
+  <data name="LatestArticles" xml:space="preserve">
+    <value>מאמרים אחרונים</value>
+  </data>
+  <data name="PracticeAreas" xml:space="preserve">
+    <value>תחומי עיסוק</value>
+  </data>
+  <data name="CtaEyebrow" xml:space="preserve">
+    <value>נתקלת בבעיה משפטית?</value>
+  </data>
+  <data name="CtaTitle" xml:space="preserve">
+    <value>תפנה אלי לשיחת ייעוץ</value>
+  </data>
+  <data name="HomePracticeHeading" xml:space="preserve">
+    <value>פתרונות משפטיים מותאמים לקוח</value>
+  </data>
+  <data name="HomeCtaText" xml:space="preserve">
+    <value>זמן יכול להיות קריטי בעניינים משפטיים. התקשר עכשיו כדי לדבר ישירות עם עורך דין שיוכל לספק הדרכה ופתרונות אסטרטגיים.</value>
+  </data>
+  <data name="HomeContactTitle" xml:space="preserve">
+    <value>תפנה אלי לשיחת היכרות</value>
+  </data>
+  <data name="HomeContactLead" xml:space="preserve">
+    <value>תודה שבחרת בי עבור הצרכים המשפטיים שלך.</value>
+  </data>
+  <data name="BlogEyebrow" xml:space="preserve">
+    <value>הבלוג המשפטי</value>
+  </data>
+  <data name="BlogHeading" xml:space="preserve">
+    <value>סוגיות משפטיות ועדכונים</value>
+  </data>
+  <data name="BlogLead" xml:space="preserve">
+    <value>מאמרים ועדכונים משפטיים ליזמים ולעסקים – הסכמים, השקעות והגנת פרטיות.</value>
+  </data>
+  <data name="BlogSub" xml:space="preserve">
+    <value>הישארו מעודכנים בתובנות, בחדשות, ובעדכונים המשפטיים האחרונים</value>
+  </data>
+  <data name="BlogTitle" xml:space="preserve">
+    <value>בלוג</value>
+  </data>
+  <data name="BlogHeroText" xml:space="preserve">
+    <value>עדכונים וחדשות</value>
+  </data>
+  <data name="BlogPageTitle" xml:space="preserve">
+    <value>בלוג | {0}</value>
+  </data>
+  <data name="BlogEmpty" xml:space="preserve">
+    <value>אין מאמרים להצגה כרגע.</value>
+  </data>
+  <data name="PagerNav" xml:space="preserve">
+    <value>עמודי הבלוג</value>
+  </data>
+  <data name="PagerPrevious" xml:space="preserve">
+    <value>הקודם</value>
+  </data>
+  <data name="PagerNext" xml:space="preserve">
+    <value>הבא</value>
+  </data>
+  <data name="NotFoundPageTitle" xml:space="preserve">
+    <value>הדף לא נמצא | {0}</value>
+  </data>
+  <data name="NotFoundTitle" xml:space="preserve">
+    <value>...אופס, הדף לא נמצא</value>
+  </data>
+  <data name="NotFoundText" xml:space="preserve">
+    <value>אנא השתמש בתפריט הניווט למעלה כדי למצוא את מה שאתה מחפש, או אל תהסס לפנות אלי לקבלת עזרה.</value>
+  </data>
+  <data name="NotFoundHome" xml:space="preserve">
+    <value>חזרה לדף הבית</value>
+  </data>
+</root>

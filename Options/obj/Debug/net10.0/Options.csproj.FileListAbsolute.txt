@@ -1,0 +1,15 @@
+C:\Projects\EliSolution\Options\bin\Debug\net10.0\Options.deps.json
+C:\Projects\EliSolution\Options\bin\Debug\net10.0\Options.dll
+C:\Projects\EliSolution\Options\bin\Debug\net10.0\Options.pdb
+C:\Projects\EliSolution\Options\obj\Debug\net10.0\Options.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\EliSolution\Options\obj\Debug\net10.0\Options.AssemblyInfoInputs.cache
+C:\Projects\EliSolution\Options\obj\Debug\net10.0\Options.AssemblyInfo.cs
+C:\Projects\EliSolution\Options\obj\Debug\net10.0\Options.csproj.CoreCompileInputs.cache
+C:\Projects\EliSolution\Options\obj\Debug\net10.0\Options.dll
+C:\Projects\EliSolution\Options\obj\Debug\net10.0\refint\Options.dll
+C:\Projects\EliSolution\Options\obj\Debug\net10.0\Options.pdb
+C:\Projects\EliSolution\Options\obj\Debug\net10.0\ref\Options.dll
+C:\Users\Igor\AppData\Local\Temp\eli-gw-build\Options.deps.json
+C:\Users\Igor\AppData\Local\Temp\eli-gw-build\Options.dll
+C:\Users\Igor\AppData\Local\Temp\eli-gw-build\Options.pdb
+C:\Projects\EliSolution\Options\obj\Debug\net10.0\Options.csproj.Up2Date

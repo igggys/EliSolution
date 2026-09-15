@@ -1,0 +1,281 @@
+@model Models.PublicSite.PrivacyPolicyPage
+@using Helpers
+@using System.Linq
+@{
+    Layout = null;
+
+    var policy = Model.PrivacyPolicy!;
+    var contact = Model.ContactInfo;
+    var dir = WritingDirection.GetHtmlDir(Model.CurrentLanguage.Code);
+    var lang = Model.CurrentLanguage.Code;
+    var homePath = SiteRoutes.BuildMenuPath("/", lang);
+    var privacyPath = SiteRoutes.BuildPrivacyPolicyPath(lang);
+    var termsPath = SiteRoutes.BuildTermsOfUsePath(lang);
+    var contactHref = homePath == "/" ? "/#contact" : homePath + "#contact";
+    var pageTitle = policy.SeoTitle ?? policy.Name;
+
+    string DigitsOnly(string? value) => string.Concat((value ?? string.Empty).Where(char.IsDigit));
+
+    var phoneDigits = DigitsOnly(contact?.Phone);
+    var whatsAppDigits = DigitsOnly(contact?.WhatsApp);
+    var email = contact?.Email;
+    var phoneDisplay = contact?.Phone;
+    var legal = LegalBodyParser.Parse(policy.Body);
+}
+
+<!DOCTYPE html>
+<html lang="@lang" dir="@dir">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@pageTitle</title>
+    @if (!string.IsNullOrWhiteSpace(policy.MetaDescription))
+    {
+        <meta name="description" content="@policy.MetaDescription">
+    }
+    @if (!string.IsNullOrWhiteSpace(policy.MetaRobots))
+    {
+        <meta name="robots" content="@policy.MetaRobots">
+    }
+    @if (!string.IsNullOrWhiteSpace(policy.OgTitle))
+    {
+        <meta property="og:title" content="@policy.OgTitle">
+    }
+    @if (!string.IsNullOrWhiteSpace(policy.OgDescription))
+    {
+        <meta property="og:description" content="@policy.OgDescription">
+    }
+    @if (!string.IsNullOrWhiteSpace(policy.OgImage))
+    {
+        <meta property="og:image" content="@policy.OgImage">
+    }
+    @if (!string.IsNullOrWhiteSpace(policy.OgType))
+    {
+        <meta property="og:type" content="@policy.OgType">
+    }
+    @if (!string.IsNullOrWhiteSpace(policy.OgUrl))
+    {
+        <meta property="og:url" content="@policy.OgUrl">
+    }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="~/Styles/StyleSheetRTL.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="site-sticky">
+    <!-- ============== TOP BAR ============== -->
+    <div class="topbar">
+        <div class="topbar-inner">
+            @if (!string.IsNullOrWhiteSpace(email))
+            {
+                <a href="mailto:@email" class="topbar-item" title="@email">
+                    <img src="~/images/email.png" alt="" class="icon-img">
+                    <span class="label">@email</span>
+                </a>
+            }
+            @if (!string.IsNullOrWhiteSpace(phoneDisplay))
+            {
+                <a href="tel:@phoneDigits" class="topbar-item" title="@phoneDisplay">
+                    <img src="~/images/phone.png" alt="" class="icon-img">
+                    <span class="label">@phoneDisplay</span>
+                </a>
+            }
+            @if (!string.IsNullOrWhiteSpace(whatsAppDigits))
+            {
+                <a href="https://wa.me/@whatsAppDigits" target="_blank" rel="noopener" class="topbar-item" title="@T["WhatsApp"]">
+                    <img src="~/images/whatsapp.png" alt="" class="icon-img">
+                    <span class="label">@T["WhatsApp"]</span>
+                </a>
+            }
+        </div>
+    </div>
+
+    <!-- ============== HEADER ============== -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="@homePath" class="logo">
+                <img src="~/images/Logo.png" alt="@T["FirmName"]" class="logo-img">
+            </a>
+
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    @foreach (var item in Model.Menu.Items.Reverse())
+                    {
+                        var hasSubMenu = item.SubMenu.Count > 0;
+                        <li class="@(hasSubMenu ? "has-dropdown" : null)">
+                            @if (hasSubMenu)
+                            {
+                                <span class="nav-parent">
+                                    @item.Title
+                                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6" /></svg>
+                                </span>
+                            }
+                            else
+                            {
+                                <a href="@SiteRoutes.BuildMenuPath(item.Url, lang)">@item.Title</a>
+                            }
+                            @if (hasSubMenu)
+                            {
+                                <ul class="dropdown">
+                                    @foreach (var subItem in item.SubMenu)
+                                    {
+                                        <li>
+                                            <a href="@SiteRoutes.BuildMenuPath(subItem.Url, lang)">@subItem.Title</a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </li>
+                    }
+                </ul>
+            </nav>
+
+            <a href="@contactHref" class="btn btn-primary">@T["Contact"]</a>
+
+            <button class="nav-toggle" id="navToggle" aria-label="@T["OpenMenu"]" aria-expanded="false" aria-controls="mainNav">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+            </button>
+        </div>
+    </header>
+    </div>
+
+    <main>
+
+        @if (legal.HasStructuredSections)
+        {
+            <section class="legal-hero">
+                <div class="legal-hero-inner">
+                    <h1>@policy.Name</h1>
+                    @if (!string.IsNullOrWhiteSpace(legal.AfterwordHtml))
+                    {
+                        <div class="legal-hero-meta">@Html.Raw(legal.AfterwordHtml)</div>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(legal.IntroHtml))
+                    {
+                        <div class="legal-hero-intro">@Html.Raw(legal.IntroHtml)</div>
+                    }
+                </div>
+            </section>
+
+            <div class="legal-layout">
+                <nav class="legal-toc" aria-label="@policy.Name">
+                    @foreach (var entry in legal.Sections)
+                    {
+                        <a href="#legal-entry-@entry.Number" class="legal-toc-row" data-legal-target="legal-entry-@entry.Number">
+                            <span class="legal-toc-title">@entry.Title</span>
+                            <span class="legal-toc-num">@entry.NumberLabel</span>
+                        </a>
+                    }
+                </nav>
+
+                <div class="legal-sections">
+                    @foreach (var entry in legal.Sections)
+                    {
+                        <article class="legal-section" id="legal-entry-@entry.Number">
+                            <header class="legal-section-head">
+                                <h2>@entry.Title</h2>
+                                <span class="legal-section-num">@entry.NumberLabel</span>
+                            </header>
+                            @if (!string.IsNullOrWhiteSpace(entry.BodyHtml))
+                            {
+                                <div class="legal-section-body">
+                                    @Html.Raw(entry.BodyHtml)
+                                </div>
+                            }
+                        </article>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <section class="page-hero">
+                <div class="container">
+                    <h1>@policy.Name</h1>
+                </div>
+            </section>
+
+            <section class="legal-page">
+                <div class="container">
+                    @if (!string.IsNullOrWhiteSpace(policy.Body))
+                    {
+                        <div class="legal-page-body">
+                            @Html.Raw(policy.Body)
+                        </div>
+                    }
+                </div>
+            </section>
+        }
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-top">
+
+            <div class="footer-logo">
+                <a href="@homePath" class="logo">
+                    <img src="~/images/Logo.png" alt="@T["FirmName"]" class="logo-img">
+                </a>
+                <p>@T["FooterTagline"]</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>@T["FooterContact"]</h4>
+                @if (!string.IsNullOrWhiteSpace(phoneDisplay))
+                {
+                    <a href="tel:@phoneDigits" class="contact-line">
+                        <img src="~/images/phone.png" alt="" class="icon-img">
+                        @phoneDisplay
+                    </a>
+                }
+                @if (!string.IsNullOrWhiteSpace(whatsAppDigits))
+                {
+                    <a href="https://wa.me/@whatsAppDigits" target="_blank" rel="noopener" class="contact-line">
+                        <img src="~/images/whatsapp.png" alt="" class="icon-img">
+                        @T["WhatsApp"]
+                    </a>
+                }
+                @if (!string.IsNullOrWhiteSpace(email))
+                {
+                    <a href="mailto:@email" class="contact-line">
+                        <img src="~/images/email.png" alt="" class="icon-img">
+                        @email
+                    </a>
+                }
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>@T["Copyright", DateTime.UtcNow.Year]</p>
+            <p class="footer-legal">
+                <a href="@privacyPath">@T["PrivacyPolicy"]</a>
+                <span aria-hidden="true"> | </span>
+                <a href="@termsPath">@T["TermsOfUse"]</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+            const navToggle = document.getElementById('navToggle');
+            const mainNav = document.getElementById('mainNav');
+            if (navToggle && mainNav) {
+              navToggle.addEventListener('click', () => {
+                const isOpen = mainNav.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+              });
+
+              mainNav.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => {
+                  mainNav.classList.remove('open');
+                  navToggle.setAttribute('aria-expanded', 'false');
+                });
+              });
+            }
+    </script>
+    <script src="~/js/legal-toc.js"></script>
+
+</body>
+</html>

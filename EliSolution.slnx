@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/Database/" />
+  <Folder Name="/Database/Scripts/">
+    <File Path="Database/Scripts/CreationDB.sql" />
+    <File Path="Database/Scripts/EliAuthDB.sql" />
+  </Folder>
+  <Project Path="AdministratorGateWay/AdministratorGateWay.csproj" />
+  <Project Path="Auth/Auth.csproj" Id="da43754d-0936-4eeb-8c23-0b40f6eb0c79" />
+  <Project Path="ConsoleAppExampls/ConsoleAppExampls.csproj" Id="8d7732c0-37bd-4a6b-855a-f624927e5b8c" />
+  <Project Path="DataManager/DataManager.csproj" />
+  <Project Path="Helpers/Helpers.csproj" />
+  <Project Path="Models/Models.csproj" />
+  <Project Path="Options/Options.csproj" />
+  <Project Path="PublicSite/PublicSite.csproj" />
+  <Project Path="Services/Services.csproj" Id="5da67c26-dd13-48cb-befb-5a49fc9a9658" />
+</Solution>

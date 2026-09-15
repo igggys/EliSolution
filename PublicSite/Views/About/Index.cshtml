@@ -1,0 +1,270 @@
+﻿@model Models.PublicSite.AboutPage
+@using Helpers
+@using System.Linq
+@{
+    Layout = null;
+
+    var about = Model.About!;
+    var contact = Model.ContactInfo;
+    var currentUrl = about.Url;
+    var dir = WritingDirection.GetHtmlDir(Model.CurrentLanguage.Code);
+    var lang = Model.CurrentLanguage.Code;
+    var homePath = SiteRoutes.BuildMenuPath("/", lang);
+    var privacyPath = SiteRoutes.BuildPrivacyPolicyPath(lang);
+    var termsPath = SiteRoutes.BuildTermsOfUsePath(lang);
+    var contactHref = homePath == "/" ? "/#contact" : homePath + "#contact";
+
+    string DigitsOnly(string? value) => string.Concat((value ?? string.Empty).Where(char.IsDigit));
+
+    var phoneDigits = DigitsOnly(contact?.Phone);
+    var whatsAppDigits = DigitsOnly(contact?.WhatsApp);
+    var email = contact?.Email;
+    var phoneDisplay = contact?.Phone;
+    var pageTitle = about.SeoTitle ?? about.Name;
+}
+
+<!DOCTYPE html>
+<html lang="@lang" dir="@dir">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@pageTitle</title>
+    @if (!string.IsNullOrWhiteSpace(about.MetaDescription))
+    {
+        <meta name="description" content="@about.MetaDescription">
+    }
+    @if (!string.IsNullOrWhiteSpace(about.MetaRobots))
+    {
+        <meta name="robots" content="@about.MetaRobots">
+    }
+    @if (!string.IsNullOrWhiteSpace(about.OgTitle))
+    {
+        <meta property="og:title" content="@about.OgTitle">
+    }
+    @if (!string.IsNullOrWhiteSpace(about.OgDescription))
+    {
+        <meta property="og:description" content="@about.OgDescription">
+    }
+    @if (!string.IsNullOrWhiteSpace(about.OgImage))
+    {
+        <meta property="og:image" content="@about.OgImage">
+    }
+    @if (!string.IsNullOrWhiteSpace(about.OgType))
+    {
+        <meta property="og:type" content="@about.OgType">
+    }
+    @if (!string.IsNullOrWhiteSpace(about.OgUrl))
+    {
+        <meta property="og:url" content="@about.OgUrl">
+    }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="~/Styles/StyleSheetRTL.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="site-sticky">
+    <!-- ============== TOP BAR ============== -->
+    <div class="topbar">
+        <div class="topbar-inner">
+            @if (!string.IsNullOrWhiteSpace(email))
+            {
+                <a href="mailto:@email" class="topbar-item" title="@email">
+                    <img src="~/images/email.png" alt="" class="icon-img">
+                    <span class="label">@email</span>
+                </a>
+            }
+            @if (!string.IsNullOrWhiteSpace(phoneDisplay))
+            {
+                <a href="tel:@phoneDigits" class="topbar-item" title="@phoneDisplay">
+                    <img src="~/images/phone.png" alt="" class="icon-img">
+                    <span class="label">@phoneDisplay</span>
+                </a>
+            }
+            @if (!string.IsNullOrWhiteSpace(whatsAppDigits))
+            {
+                <a href="https://wa.me/@whatsAppDigits" target="_blank" rel="noopener" class="topbar-item" title="@T["WhatsApp"]">
+                    <img src="~/images/whatsapp.png" alt="" class="icon-img">
+                    <span class="label">@T["WhatsApp"]</span>
+                </a>
+            }
+        </div>
+    </div>
+
+    <!-- ============== HEADER ============== -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="@homePath" class="logo">
+                <img src="~/images/Logo.png" alt="@T["FirmName"]" class="logo-img">
+            </a>
+
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    @foreach (var item in Model.Menu.Items.Reverse())
+                    {
+                        var hasSubMenu = item.SubMenu.Count > 0;
+                        var isActive = SiteRoutes.IsAboutUrl(item.Url);
+                        <li class="@(hasSubMenu ? "has-dropdown" : null)">
+                            @if (hasSubMenu)
+                            {
+                                <span class="nav-parent">
+                                    @item.Title
+                                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6" /></svg>
+                                </span>
+                            }
+                            else
+                            {
+                                <a href="@SiteRoutes.BuildMenuPath(item.Url, lang)"
+                                   class="@(isActive ? "active" : null)">
+                                    @item.Title
+                                </a>
+                            }
+                            @if (hasSubMenu)
+                            {
+                                <ul class="dropdown">
+                                    @foreach (var subItem in item.SubMenu)
+                                    {
+                                        <li>
+                                            <a href="@SiteRoutes.BuildMenuPath(subItem.Url, lang)">
+                                                @subItem.Title
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </li>
+                    }
+                </ul>
+            </nav>
+
+            <a href="@contactHref" class="btn btn-primary">@T["Contact"]</a>
+
+            <button class="nav-toggle" id="navToggle" aria-label="@T["OpenMenu"]" aria-expanded="false" aria-controls="mainNav">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+            </button>
+        </div>
+    </header>
+    </div>
+
+    <main>
+
+        <!-- ============== PAGE TITLE HERO ============== -->
+        <section class="page-hero">
+            <div class="container">
+                <h1>@about.Name</h1>
+            </div>
+        </section>
+
+        <!-- ============== ABOUT DETAIL ============== -->
+        <section class="about-detail">
+            <div class="about-detail-grid container">
+
+                <div class="about-detail-text reveal">
+                    <span class="eyebrow">@about.Name</span>
+                    @if (!string.IsNullOrWhiteSpace(about.Slogan))
+                    {
+                        <h2>@about.Slogan</h2>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(about.Body))
+                    {
+                        @Html.Raw(about.Body)
+                    }
+
+                    <a href="/#contact" class="btn btn-primary">@T["TalkToMe"]</a>
+                </div>
+
+                <div class="about-detail-media reveal">
+                    <div class="about-photo-wrap">
+                        <div class="about-photo-frame">
+                            @if (!string.IsNullOrWhiteSpace(about.ImageUrl))
+                            {
+                                <img src="@Url.Content("~" + about.ImageUrl)" alt="@about.Name" class="about-photo-img">
+                            }
+                        </div>
+                        @if (about.ExperienceYears is int years)
+                        {
+                            <div class="about-badge">
+                                <span class="about-badge-number">@years<sup>+</sup></span>
+                                <span class="about-badge-label">@T["ExperienceYears"]</span>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============== FOOTER ============== -->
+    <footer class="site-footer">
+        <div class="footer-top">
+
+            <div class="footer-logo">
+                <a href="@homePath" class="logo">
+                    <img src="~/images/Logo.png" alt="@T["FirmName"]" class="logo-img">
+                </a>
+                <p>@T["FooterTagline"]</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>@T["FooterContact"]</h4>
+                @if (!string.IsNullOrWhiteSpace(phoneDisplay))
+                {
+                    <a href="tel:@phoneDigits" class="contact-line">
+                        <img src="~/images/phone.png" alt="" class="icon-img">
+                        @phoneDisplay
+                    </a>
+                }
+                @if (!string.IsNullOrWhiteSpace(whatsAppDigits))
+                {
+                    <a href="https://wa.me/@whatsAppDigits" target="_blank" rel="noopener" class="contact-line">
+                        <img src="~/images/whatsapp.png" alt="" class="icon-img">
+                        @T["WhatsApp"]
+                    </a>
+                }
+                @if (!string.IsNullOrWhiteSpace(email))
+                {
+                    <a href="mailto:@email" class="contact-line">
+                        <img src="~/images/email.png" alt="" class="icon-img">
+                        @email
+                    </a>
+                }
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>@T["Copyright", DateTime.UtcNow.Year]</p>
+            <p class="footer-legal">
+                <a href="@privacyPath">@T["PrivacyPolicy"]</a>
+                <span aria-hidden="true"> | </span>
+                <a href="@termsPath">@T["TermsOfUse"]</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+            // Mobile nav toggle
+            const navToggle = document.getElementById('navToggle');
+            const mainNav = document.getElementById('mainNav');
+            if (navToggle && mainNav) {
+              navToggle.addEventListener('click', () => {
+                const isOpen = mainNav.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+              });
+
+              mainNav.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => {
+                  mainNav.classList.remove('open');
+                  navToggle.setAttribute('aria-expanded', 'false');
+                });
+              });
+            }
+    </script>
+    <script src="~/js/reveal.js"></script>
+
+</body>
+</html>

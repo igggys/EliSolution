@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Projects\EliSolution\PublicSite\bin\Release\net10.0\publish\</_PublishTargetUrl>
+    <History>True|2026-09-15T11:44:08.6200237Z||;True|2026-09-13T13:10:48.7442463+03:00||;True|2026-09-12T19:59:51.6919548+03:00||;True|2026-09-12T13:27:53.5623666+03:00||;True|2026-09-12T12:02:15.5960878+03:00||;True|2026-08-21T07:05:33.7313446+03:00||;True|2026-08-21T07:03:49.7687776+03:00||;True|2026-08-20T22:15:46.4006189+03:00||;True|2026-08-20T22:14:05.3006581+03:00||;True|2026-08-20T22:03:44.7002606+03:00||;True|2026-08-19T21:23:25.5361185+03:00||;True|2026-08-19T21:23:10.2024586+03:00||;True|2026-08-19T05:59:22.1411855+03:00||;True|2026-08-17T21:46:39.8231901+03:00||;True|2026-08-16T21:42:09.9150844+03:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>
